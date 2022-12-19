@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="IterationOneTests.PlayerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-12-18T14:41:24" hostname="michael-OptiPlex-390" time="0.008">
+<testsuite name="IterationOneTests.PlayerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-12-19T14:17:01" hostname="michael-OptiPlex-390" time="0.006">
   <properties/>
   <testcase name="testStopPlay()" classname="IterationOneTests.PlayerTest" time="0.001"/>
   <testcase name="testAddCard()" classname="IterationOneTests.PlayerTest" time="0.0"/>
-  <testcase name="testPlayerIsBusted()" classname="IterationOneTests.PlayerTest" time="0.002"/>
+  <testcase name="testPlayerIsBusted()" classname="IterationOneTests.PlayerTest" time="0.0"/>
   <testcase name="testPlayerHit()" classname="IterationOneTests.PlayerTest" time="0.0"/>
   <testcase name="testReset()" classname="IterationOneTests.PlayerTest" time="0.0"/>
   <testcase name="testPlayerNoHit()" classname="IterationOneTests.PlayerTest" time="0.0"/>

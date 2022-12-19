@@ -30,7 +30,7 @@ public class Rank {
     private final int rank;
     private final String displayValue;
 
-    private Rank(int rank, String displayValue ) {
+    private Rank( int rank, String displayValue ) {
         this.rank = rank;
         this.displayValue = displayValue;
     }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="IterationThreeTests.PlayerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-12-19T14:17:01" hostname="michael-OptiPlex-390" time="0.033">
+  <properties/>
+  <testcase name="testAddCard()" classname="IterationThreeTests.PlayerTest" time="0.023"/>
+  <testcase name="testWaitingState()" classname="IterationThreeTests.PlayerTest" time="0.001"/>
+  <testcase name="testBustedState()" classname="IterationThreeTests.PlayerTest" time="0.001"/>
+  <testcase name="testPlayingState()" classname="IterationThreeTests.PlayerTest" time="0.001"/>
+  <testcase name="testBlackjackState()" classname="IterationThreeTests.PlayerTest" time="0.001"/>
+  <testcase name="testStandingState()" classname="IterationThreeTests.PlayerTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

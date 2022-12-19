@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="IterationTwoTests.HandTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-12-18T14:41:24" hostname="michael-OptiPlex-390" time="0.006">
+  <properties/>
+  <testcase name="testAddCard()" classname="IterationTwoTests.HandTest" time="0.001"/>
+  <testcase name="testEqual()" classname="IterationTwoTests.HandTest" time="0.001"/>
+  <testcase name="testReset()" classname="IterationTwoTests.HandTest" time="0.0"/>
+  <testcase name="testTotal()" classname="IterationTwoTests.HandTest" time="0.0"/>
+  <testcase name="testBust()" classname="IterationTwoTests.HandTest" time="0.0"/>
+  <testcase name="testIsGreaterThan()" classname="IterationTwoTests.HandTest" time="0.001"/>
+  <testcase name="testBlackjack()" classname="IterationTwoTests.HandTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

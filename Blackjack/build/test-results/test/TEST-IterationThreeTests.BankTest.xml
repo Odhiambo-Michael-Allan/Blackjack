@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="IterationThreeTests.BankTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-12-18T14:41:24" hostname="michael-OptiPlex-390" time="0.008">
+  <properties/>
+  <testcase name="testPlace100Bet()" classname="IterationThreeTests.BankTest" time="0.001"/>
+  <testcase name="testWin()" classname="IterationThreeTests.BankTest" time="0.001"/>
+  <testcase name="testLose()" classname="IterationThreeTests.BankTest" time="0.001"/>
+  <testcase name="testToString()" classname="IterationThreeTests.BankTest" time="0.001"/>
+  <testcase name="testPlace10Bet()" classname="IterationThreeTests.BankTest" time="0.001"/>
+  <testcase name="testPlace50Bet()" classname="IterationThreeTests.BankTest" time="0.001"/>
+  <testcase name="testBlackjack()" classname="IterationThreeTests.BankTest" time="0.001"/>
+  <testcase name="testStandOff()" classname="IterationThreeTests.BankTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

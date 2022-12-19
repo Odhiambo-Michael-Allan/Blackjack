@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="IterationOneTests.HandTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-12-18T14:41:24" hostname="michael-OptiPlex-390" time="0.002">
+  <properties/>
+  <testcase name="testTotal()" classname="IterationOneTests.HandTest" time="0.001"/>
+  <testcase name="testBust()" classname="IterationOneTests.HandTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

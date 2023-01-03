@@ -1,6 +1,5 @@
 package org.mantis.BlackjackIteration3;
 
-
 /**
  * This is the class representation of a card.
  * @author Michael Allan Odhiambo.

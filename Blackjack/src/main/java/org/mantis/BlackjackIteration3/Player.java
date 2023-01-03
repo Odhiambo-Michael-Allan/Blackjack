@@ -1,11 +1,22 @@
 package org.mantis.BlackjackIteration3;
 
+import org.mantis.BlackjackIteration3.NotificationListeners.*;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+/**
+ * This is the abstract base class for Blackjack players. A player holds a hand, adds cards to the
+ * hand, knows how to play, provides state information and provides listener support.
+ *
+ * @Author Michael Allan Odhiambo.
+ */
 public abstract class Player {
 
-    private String name;
     private Hand hand;
+    private String name;
+    private ArrayList<PlayerListener> listeners = new ArrayList<>();
     private PlayerState currentState;
-
 
     public Player( String name, Hand hand ) {
         this.name = name;
@@ -13,45 +24,70 @@ public abstract class Player {
         setCurrentState( getInitialState() );
     }
 
-    private void setCurrentState( PlayerState currentState ) {
+    protected final void setCurrentState( PlayerState currentState ) {
         this.currentState = currentState;
         this.hand.setHolder( this.currentState );
+    }
+
+    protected final PlayerState getCurrentState() {
+        return this.currentState;
     }
 
     protected PlayerState getInitialState() {
         return new WaitingState();
     }
 
-    public void play( Dealer dealer ) {
-        getCurrentState().execute( dealer );
-    }
-
     public void addCard( Card card ) {
         this.hand.addCard( card );
     }
 
-    public Hand getHand() {
-        return this.hand;
+    public void play( Dealer dealer ) {
+        currentState.execute( dealer );
     }
 
-    private PlayerState getCurrentState() {
-        return this.currentState;
+    public void reset() {
+        this.hand.reset();
+        setCurrentState( getInitialState() );
     }
 
-    protected PlayerState getPlayingState() {
-        return new PlayingState();
+    public void addListener( PlayerListener listener ) {
+        listeners.add( listener );
     }
 
-    protected PlayerState getStandingState() {
-        return new StandingState();
+    public String getName() {
+        return this.name;
     }
 
-    protected PlayerState getBustedState() {
-        return new BustedState();
+    public String toString() {
+        return ( getName() + ": " + hand.toString() );
     }
 
-    protected PlayerState getBlackjackState() {
-        return new BlackjackState();
+    public void win() {
+        notifyListeners( new NotifyWonHelper() );
+    }
+
+    public void lose() {
+        notifyListeners( new NotifyLostHelper() );
+    }
+
+    public void standoff() {
+        notifyListeners( new NotifyStandOffHelper() );
+    }
+
+    public void blackjack() {
+        notifyListeners( new NotifyBlackjackHelper() );
+    }
+
+    protected Hand getHand() {
+        return hand;
+    }
+
+    protected void notifyListeners( NotificationHelper notificationHelper ) {
+        Iterator i = listeners.iterator();
+        while ( i.hasNext() ) {
+            PlayerListener playerListener = ( PlayerListener ) i.next();
+            notificationHelper.notifyListener( playerListener , this );
+        }
     }
 
     protected abstract boolean hit();
@@ -59,17 +95,16 @@ public abstract class Player {
     private class WaitingState implements PlayerState {
 
         @Override
-        public void handChanged() {
-        }
-
-        @Override
         public void handPlayable() {
+            // Transition..
             setCurrentState( getPlayingState() );
         }
 
         @Override
         public void handBlackjack() {
+            // Transition..
             setCurrentState( getBlackjackState() );
+            notifyListeners( new NotifyBlackjackHelper() );
         }
 
         @Override
@@ -78,17 +113,101 @@ public abstract class Player {
         }
 
         @Override
+        public void handChanged() {
+            notifyListeners( new NotifyChangedHelper() );
+        }
+
+        @Override
         public void execute( Dealer dealer ) {
-            // Do nothing in the waiting state
+            // Do nothing in waiting state..
+        }
+    }
+
+    private class BustedState implements PlayerState {
+
+        @Override
+        public void handPlayable() {
+            // Not possible in busted state..
+        }
+
+        @Override
+        public void handBlackjack() {
+            // Not possible in busted state..
+        }
+
+        @Override
+        public void handBusted() {
+            // Not possible in busted state..
+        }
+
+        @Override
+        public void handChanged() {
+            // Not possible in busted state..
+        }
+
+        @Override
+        public void execute( Dealer dealer ) {
+            dealer.busted( Player.this );
+        }
+    }
+
+    private class BlackjackState implements PlayerState {
+
+        @Override
+        public void handPlayable() {
+            // Not possible in blackjack state..
+        }
+
+        @Override
+        public void handBlackjack() {
+            // Not possible in blackjack state..
+        }
+
+        @Override
+        public void handBusted() {
+            // Not possible in blackjack state..
+        }
+
+        @Override
+        public void handChanged() {
+            // Not possible in blackjack state..
+        }
+
+        @Override
+        public void execute( Dealer dealer ) {
+            dealer.blackjack( Player.this );
+        }
+    }
+
+    private class StandingState implements PlayerState {
+
+        @Override
+        public void handPlayable() {
+            // Not possible in standing state..
+        }
+
+        @Override
+        public void handBlackjack() {
+            // Not possible in standing state..
+        }
+
+        @Override
+        public void handBusted() {
+            // Not possible in standing state..
+        }
+
+        @Override
+        public void handChanged() {
+            // Not possible in standing state..
+        }
+
+        @Override
+        public void execute( Dealer dealer ) {
+            dealer.standing( Player.this );
         }
     }
 
     private class PlayingState implements PlayerState {
-
-        @Override
-        public void handChanged() {
-
-        }
 
         @Override
         public void handPlayable() {
@@ -103,6 +222,12 @@ public abstract class Player {
         @Override
         public void handBusted() {
             setCurrentState( getBustedState() );
+            notifyListeners( new NotifyBustedHelper() );
+        }
+
+        @Override
+        public void handChanged() {
+            notifyListeners( new NotifyChangedHelper() );
         }
 
         @Override
@@ -110,95 +235,30 @@ public abstract class Player {
             if ( hit() )
                 dealer.hit( Player.this );
             else {
-                // The player is standing..
-                setCurrentState(getStandingState());
+                setCurrentState( getStandingState() );
+                notifyListeners( new NotifyStandingHelper() );
             }
-            getCurrentState().execute( dealer );
+            currentState.execute( dealer );
         }
     }
 
-    private class StandingState implements PlayerState {
-
-        @Override
-        public void handChanged() {
-
-        }
-
-        @Override
-        public void handPlayable() {
-
-        }
-
-        @Override
-        public void handBlackjack() {
-
-        }
-
-        @Override
-        public void handBusted() {
-
-        }
-
-        @Override
-        public void execute( Dealer dealer ) {
-            dealer.standing( Player.this );
-        }
+    protected PlayerState getPlayingState() {
+        return new PlayingState();
     }
 
-    private class BustedState implements PlayerState {
-
-        @Override
-        public void handChanged() {
-
-        }
-
-        @Override
-        public void handPlayable() {
-
-        }
-
-        @Override
-        public void handBlackjack() {
-
-        }
-
-        @Override
-        public void handBusted() {
-
-        }
-
-        @Override
-        public void execute(Dealer dealer) {
-            dealer.busted( Player.this );
-        }
+    protected PlayerState getBlackjackState() {
+        return new BlackjackState();
     }
 
-    private class BlackjackState implements PlayerState {
-
-        @Override
-        public void handChanged() {
-
-        }
-
-        @Override
-        public void handPlayable() {
-
-        }
-
-        @Override
-        public void handBlackjack() {
-
-        }
-
-        @Override
-        public void handBusted() {
-
-        }
-
-        @Override
-        public void execute( Dealer dealer ) {
-            dealer.blackjack( Player.this );
-        }
+    protected PlayerState getStandingState() {
+        return new StandingState();
     }
 
+    protected PlayerState getWaitingState() {
+        return new WaitingState();
+    }
+
+    protected PlayerState getBustedState() {
+        return new BustedState();
+    }
 }

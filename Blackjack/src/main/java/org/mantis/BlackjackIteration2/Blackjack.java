@@ -18,6 +18,16 @@ public class Blackjack {
         dealer.addListener( Console.INSTANCE );
         player.addListener( Console.INSTANCE );
         dealer.addPlayer( player );
-        dealer.newGame();
+        do {
+            dealer.newGame();
+        } while ( playAgain() );
+    }
+
+    private static boolean playAgain() {
+        Console.INSTANCE.printMessage( "Would you like to play again? [Y]es [N]o:" );
+        String response = Console.INSTANCE.readInput( "invalid" );
+        if ( response.equalsIgnoreCase( "y" ) )
+            return true;
+        return false;
     }
 }

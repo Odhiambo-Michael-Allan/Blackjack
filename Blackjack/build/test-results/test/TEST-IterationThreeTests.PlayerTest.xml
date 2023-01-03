@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="IterationThreeTests.PlayerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-12-19T14:17:01" hostname="michael-OptiPlex-390" time="0.033">
+<testsuite name="IterationThreeTests.PlayerTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2022-12-20T09:08:24" hostname="michael-OptiPlex-390" time="0.039">
   <properties/>
-  <testcase name="testAddCard()" classname="IterationThreeTests.PlayerTest" time="0.023"/>
-  <testcase name="testWaitingState()" classname="IterationThreeTests.PlayerTest" time="0.001"/>
-  <testcase name="testBustedState()" classname="IterationThreeTests.PlayerTest" time="0.001"/>
+  <testcase name="testNotifiesListenersOfStandoff()" classname="IterationThreeTests.PlayerTest" time="0.003"/>
+  <testcase name="testNotifiesListenerOfWin()" classname="IterationThreeTests.PlayerTest" time="0.001"/>
+  <testcase name="testAddCard()" classname="IterationThreeTests.PlayerTest" time="0.002"/>
+  <testcase name="testWaitingState()" classname="IterationThreeTests.PlayerTest" time="0.002"/>
+  <testcase name="testBustedState()" classname="IterationThreeTests.PlayerTest" time="0.003"/>
+  <testcase name="testNotifiesListenerOfHandChanged()" classname="IterationThreeTests.PlayerTest" time="0.001"/>
+  <testcase name="testNotifiesListenerOfHandBusted()" classname="IterationThreeTests.PlayerTest" time="0.003"/>
   <testcase name="testPlayingState()" classname="IterationThreeTests.PlayerTest" time="0.001"/>
-  <testcase name="testBlackjackState()" classname="IterationThreeTests.PlayerTest" time="0.001"/>
+  <testcase name="testNotifiesListenersStanding()" classname="IterationThreeTests.PlayerTest" time="0.001"/>
+  <testcase name="testNotifiesListenersOfBlackjack()" classname="IterationThreeTests.PlayerTest" time="0.001"/>
+  <testcase name="testNotifiesListenerOfLoss()" classname="IterationThreeTests.PlayerTest" time="0.001"/>
+  <testcase name="testBlackjackState()" classname="IterationThreeTests.PlayerTest" time="0.002"/>
   <testcase name="testStandingState()" classname="IterationThreeTests.PlayerTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

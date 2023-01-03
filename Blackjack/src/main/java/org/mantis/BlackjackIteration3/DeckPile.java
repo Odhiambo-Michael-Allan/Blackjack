@@ -1,8 +1,8 @@
 package org.mantis.BlackjackIteration3;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
+import java.util.Iterator;
 
 /**
  * The DeckPile holds onto an arbitrary number of decks. It provides support for dealing and shuffling cards.
@@ -70,7 +70,7 @@ public class DeckPile {
      */
     private Card deal() {
         if ( index != stack.size() ) {
-            Card card = stack.get( index );
+            Card card = ( Card ) stack.get( index );
             index++;
             return card;
         }

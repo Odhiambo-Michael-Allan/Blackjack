@@ -1,8 +1,8 @@
 package org.mantis.BlackjackIteration3;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Arrays;
 
 /**
  * The Suit class defines the valid card suits.
@@ -20,7 +20,7 @@ public class Suit {
     private final char displayValue;
 
     // Do not allow instantiation by outside objects.
-    private Suit(char displayValue ) {
+    private Suit( char displayValue ) {
         this.displayValue = displayValue;
     }
 

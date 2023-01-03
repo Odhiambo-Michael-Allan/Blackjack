@@ -3,28 +3,35 @@ package org.mantis.BlackjackIteration3;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * A Hand holds onto, provides access to, and provides information about a Blackjack hand of cards.
+ * @author Michael Allan Odhiambo.
+ */
 public class Hand {
 
     private static final int BLACKJACK = 21;
-    private HandListener holder;
     private ArrayList<Card> cards = new ArrayList<>();
+    private HandListener holder;
     private int numberOfAces;
 
     public Hand() {
-        setHolder( new HandListener() {
+        // Set the holder to a blank listener so it will not be null if not
+        // externally set.
+        this.setHolder(
+                new HandListener() {
+                    @Override
+                    public void handPlayable() {}
 
-            @Override
-            public void handChanged() {}
+                    @Override
+                    public void handBlackjack() {}
 
-            @Override
-            public void handPlayable() {}
+                    @Override
+                    public void handBusted() {}
 
-            @Override
-            public void handBlackjack() {}
-
-            @Override
-            public void handBusted() {}
-        } );
+                    @Override
+                    public void handChanged() {}
+                }
+        );
     }
 
     public void setHolder( HandListener holder ) {
@@ -33,19 +40,50 @@ public class Hand {
 
     public void addCard( Card card ) {
         cards.add( card );
+        holder.handChanged();
         if ( card.getRank() == Rank.ACE )
             numberOfAces++;
-        this.holder.handChanged();
-        if ( this.isBlackjack() )
-            this.holder.handBlackjack();
-        if ( cards.size() == 2 )
-            this.holder.handPlayable();
-        else if ( this.getTotal() > 21 )
+        if ( this.bust() )
             holder.handBusted();
+        else if ( this.blackjack() )
+            holder.handBlackjack();
+        else if ( cards.size() >= 2 )
+            holder.handPlayable();
     }
 
-    public boolean isBlackjack() {
-        return this.cards.size() == 2 && this.getTotal() == BLACKJACK;
+    public boolean bust() {
+        if ( getTotal() > BLACKJACK )
+            return true;
+        return false;
+    }
+
+    public boolean blackjack() {
+        if ( cards.size() == 2 && this.getTotal() == BLACKJACK )
+            return true;
+        return false;
+    }
+
+    public boolean isEqualTo( Hand hand ) {
+        return this.getTotal() == hand.getTotal();
+    }
+
+    public boolean isGreaterThan( Hand hand ) {
+        return this.getTotal() > hand.getTotal();
+    }
+
+    public int getTotal() {
+        int total = 0;
+        Iterator i = cards.iterator();
+        while ( i.hasNext() ) {
+            Card card = ( Card ) i.next();
+            total += card.getRank().getRank();
+        }
+        int tempAces = numberOfAces;
+        while ( total > BLACKJACK && tempAces > 0 ) {
+            total -= 10;
+            tempAces--;
+        }
+        return total;
     }
 
     public void reset() {
@@ -53,26 +91,21 @@ public class Hand {
         numberOfAces = 0;
     }
 
-    public boolean isEqualTo( Hand otherHand ) {
-        return this.getTotal() == otherHand.getTotal();
-    }
-
-    public boolean isGreaterThan( Hand otherHand ) {
-        return this.getTotal() > otherHand.getTotal();
-    }
-
-    public int getTotal() {
-        int tempNumberOfAces = numberOfAces;
-        int total = 0;
+    public void turnOver() {
         Iterator i = cards.iterator();
         while ( i.hasNext() ) {
             Card card = ( Card ) i.next();
-            total += card.getRank().getRank();
+            card.setFaceUp( true );
         }
-        while ( total > 21 && tempNumberOfAces > 0 ) {
-            total -= 10;
-            tempNumberOfAces--;
+    }
+
+    public String toString() {
+        String string = "";
+        Iterator i = cards.iterator();
+        while ( i.hasNext() ) {
+            Card card = ( Card ) i.next();
+            string = string + " " + card.toString();
         }
-        return total;
+        return string;
     }
 }

@@ -1,8 +1,8 @@
 package org.mantis.BlackjackIteration3;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Arrays;
 
 /**
  * The Rank class defines all the valid Ranks in the game of Blackjack.

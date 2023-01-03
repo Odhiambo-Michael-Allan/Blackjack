@@ -1,14 +1,17 @@
 package org.mantis.BlackjackIteration3;
 
-
+/**
+ * This is a simple implementation of a betting bank. This bank also has an unlimited
+ * credit line. You can bet yourself into oblivion. - Lucky You :)
+ * @Author Michael Allan Odhiambo.
+ */
 public class Bank {
 
-    protected double balance;
-    protected double bet;
+    private int total;
+    private int bet;
 
-    public Bank() {
-        balance = 1000;
-        bet = 0;
+    public Bank( int amount ) {
+        total = amount;
     }
 
     public void place100Bet() {
@@ -23,32 +26,31 @@ public class Bank {
         placeBet( 10 );
     }
 
+    private void placeBet( int bet ) {
+        this.bet = bet;
+        this.total -= bet;
+    }
+
     public void win() {
-        this.balance += bet*2;
-        bet = 0;
+        total += ( 2 * this.bet );
+        this.bet = 0;
     }
 
     public void lose() {
-        bet = 0;
+        this.bet = 0;
     }
 
     public void blackjack() {
-        double profit = ( 3 / 2 ) * bet;
-        balance += profit;
-        bet = 0;
+        this.total += ( ( ( 3 * this.bet ) / 2 ) + bet );
+        this.bet = 0;
     }
 
-    public void standOff() {
-        balance += bet;
-        bet = 0;
-    }
-
-    private void placeBet( double bet ) {
-        this.bet = bet;
-        balance -= bet;
+    public void standoff() {
+        this.total += this.bet;
+        this.bet = 0;
     }
 
     public String toString() {
-        return String.format( "$%.2f", balance );
+        return ( "$" + this.total + ".00" );
     }
 }

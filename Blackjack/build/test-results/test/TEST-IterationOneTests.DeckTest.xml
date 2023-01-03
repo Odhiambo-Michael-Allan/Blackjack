@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="IterationOneTests.DeckTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-12-19T14:17:01" hostname="michael-OptiPlex-390" time="0.0">
+<testsuite name="IterationOneTests.DeckTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-12-20T09:08:24" hostname="michael-OptiPlex-390" time="0.005">
   <properties/>
-  <testcase name="testDeck()" classname="IterationOneTests.DeckTest" time="0.0"/>
+  <testcase name="testDeck()" classname="IterationOneTests.DeckTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
